@@ -225,46 +225,50 @@ The GoDaddy/DNS/HTTPS launch configuration is complete and must not be repeated 
 - Approved brand destinations: now supplied and locked above.
 - Approved public brand list now contains four entries, including **Coach Jeff King**.
 
+## RBLP-003 Implementation and Verification
+
+Implementation commit: `8c4826b` (pushed to main). The home page now lists all four approved brands as normal same-tab anchor links using the exact approved URLs. Links occupy the brand row width, are underlined, retain visible keyboard focus, and have a restrained hover color. No infrastructure, legal structure, tracking behavior, or unrelated content was changed.
+
+Before deployment, all four destinations returned HTTP 200 with valid TLS after redirects. Page titles were The Den of Tools - YouTube, 3D Print Rancher - YouTube, Never guess what a print costs again · Print Ranch Manager, and Jeff King - YouTube. Print Ranch Manager redirects from the approved URL to `https://manager.3dprintrancher.com/`; the site link deliberately retains the exact approved `https://www.printranchmanager.com`. No substitute or tracking URL was introduced. Reachability and page-title checks do not audit external services or guarantee their future availability.
+
+Static checks passed for all four local pages, 37 internal link/asset/fragment references, landmarks, metadata, unique IDs, and absence of scripts/forms/embeds. Home-page responsive checks passed at 320, 375, 768 and 1440 pixels without horizontal overflow. All 14 home-page links were reached by keyboard with visible focus, including all four brand links. Brand targets measure at least 27 pixels high at tested widths. Existing text contrast remains above 4.5:1. These are basic accessibility checks, not a comprehensive WCAG audit.
+
+After deployment, all four production HTTPS pages and CSS returned 200 and matched the local committed source byte for byte through normal DNS with valid TLS. All 15 alternate HTTP/apex/www combinations redirected to the corresponding HTTPS apex paths. This production content comparison confirms that the new links and CSS are deployed. No Pages source/domain, certificate, HTTPS, DNS, registrar, or email settings were changed.
+
+No approved image files were found in the workspace/repository. Text identity remains in place. Approved horizontal lockup and RB monogram import is the only remaining non-blocking branding dependency.
+
 ## AI PROJECT HANDSHAKE
 
 **Protocol Version:** 1.0
 
-**Handshake:** H-0010
+**Handshake:** H-0011
 
-**Current Owner:** CODEX
+**Current Owner:** CHATGPT
 
-**State:** READY_FOR_BRAND_POLISH
+**State:** LIVE
 
 **Task ID:** RBLP-003
 
-**Last Completed Action:**  
-ChatGPT reviewed H-0009 after successful production launch. Jeff supplied the approved public destination URLs for The Den of Tools, 3D Print Rancher, Print Ranch Manager, and a newly approved fourth public channel, Coach Jeff King. ChatGPT validated the canonical The Den of Tools YouTube handle as `https://www.youtube.com/@denoftools` and recorded all four destinations in this README. The site remains LIVE and no infrastructure change is required.
+**Last Completed Action:**
+Codex synchronized with H-0010, read the handshake first and README.md in full, added the four approved clickable brand destinations including Coach Jeff King, and published implementation commit 8c4826b. Added accessible underlined full-width brand links and preserved the restrained design. No infrastructure or tracking changes were made. Approved logo assets were absent, so temporary text identity remains.
 
-**Verification:**  
-RBLP-002 launch verification remains valid: production is live at `https://red-beard.com`, HTTPS is enforced, apex/www behavior and required resources passed. No DNS, GoDaddy, certificate or hosting changes are required for RBLP-003. The four destination URLs are authoritative product inputs for the next implementation pass; Codex must verify each reachable destination as part of implementation.
+**Verification:**
+All four external destinations returned 200 with expected page titles; Print Ranch Manager redirects to manager.3dprintrancher.com and its approved source URL remains unchanged in the link. Static/internal link checks, responsive checks at 320/375/768/1440 pixels, and visible focus for all 14 home-page links passed. Public HTTPS pages and CSS return 200 and exactly match committed source; alternate host/scheme redirects preserve paths and TLS validates. Basic checks are not a full accessibility or external-service audit.
 
-**Branding Status:**  
-Public text identity is Red Beard Studios LLC. Approved horizontal lockup and RB monogram exist outside the repository but may still need to be imported into the Codex workspace/repository. Approved brand links are now available. The approved public brand list is The Den of Tools, 3D Print Rancher, Print Ranch Manager, and Coach Jeff King.
+**Branding Status:**
+Red Beard Studios LLC text identity and all four approved brand links are deployed. Approved horizontal lockup and RB monogram integration await asset import; no artwork was invented.
 
-**Next Required Action:**  
-Codex must synchronize to `main`, read H-0010 first and README.md in full, then perform RBLP-003 as a narrowly scoped branding/polish pass:
+**Next Required Action:**
+ChatGPT must synchronize with main, read H-0011 first and README.md in full, review the live four-brand section, and report completion to Jeff. Import Jeff's approved horizontal lockup and RB monogram into the repository/workspace, then issue the next numbered handshake assigning a narrowly scoped header/favicon/app-icon integration task using the approved palette. Do not repeat completed DNS, hosting or HTTPS work.
 
-1. Update the home-page brands section so all four approved brands/projects are present and clickable using exactly these destinations:
-   - The Den of Tools → `https://www.youtube.com/@denoftools`
-   - 3D Print Rancher → `https://www.youtube.com/@3dprintrancher`
-   - Print Ranch Manager → `https://www.printranchmanager.com`
-   - Coach Jeff King → `https://www.youtube.com/@CoachJeffKing`
-2. Preserve semantic HTML, keyboard accessibility, visible focus, responsive behavior, and the current restrained premium design.
-3. Verify all four external destinations before deployment. If one is unreachable or clearly wrong, do not invent a substitute; report the exact issue in the handoff.
-4. If Jeff's approved production logo files are available in the workspace/repository, import them into sensible `assets/` paths, use the horizontal lockup in the header and the RB monogram for favicon/app-icon use, preserving accessible text/fallback behavior. Do not redraw or approximate the artwork.
-5. If the logo files are not available to Codex, leave the current text identity in place and mark logo integration as the only remaining non-blocking dependency.
-6. Do not change GoDaddy, DNS, nameservers, MX/TXT records, GitHub Pages source/domain settings, certificates, HTTPS enforcement, analytics/tracking behavior, or unrelated site scope.
-7. Run link/static checks, responsive checks at the existing widths, keyboard/focus checks, and a public production smoke test after deployment.
-8. Commit and push all approved changes to `main`.
-9. Update README to H-0011 with Current Owner CHATGPT and report exact implementation, verification, commit/push status, working-tree status, and any remaining blocker/dependency.
+**Blockers:**
+None for the deployed link update or production site. Approved logo files are the only remaining non-blocking branding dependency.
 
-**Blockers:**  
-No blocker for adding the four brand links. Logo/header/favicon integration is blocked only if the approved image files are not available in the Codex workspace/repository. This asset dependency is non-blocking for the link update and must not delay deployment of the approved brand links.
+**Commit / Push Status:**
+Implementation 8c4826b is committed and pushed to main; this full README handoff is committed and pushed separately. The final user-facing handoff supplies its exact commit hash.
+
+**Working-tree Status:**
+Clean and synchronized with origin/main after the handoff commit and push; final Git verification is reported to Jeff.
 
 ## Handshake Rules
 
