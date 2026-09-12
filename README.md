@@ -30,6 +30,7 @@ The following public brands/projects are approved for the corporate home page an
 - **3D Print Rancher** — https://www.youtube.com/@3dprintrancher
 - **Print Ranch Manager** — https://www.printranchmanager.com
 - **Coach Jeff King** — https://www.youtube.com/@CoachJeffKing
+- **CamoBot** — https://camobot.com
 
 Do not add experimental, private, unreleased, or other Red Beard Studios LLC projects unless Jeff explicitly approves them for public listing.
 
@@ -224,7 +225,7 @@ The GoDaddy/DNS/HTTPS launch configuration is complete and must not be repeated 
 - Header identity: approved horizontal lockup with native alt-text failure fallback and an accessible home-link name.
 - Icons: approved RB monogram in ICO and PNG sizes; no artwork recoloring or redrawing.
 - Approved brand destinations: now supplied and locked above.
-- Approved public brand list now contains four entries, including **Coach Jeff King**.
+- Approved public brand list now contains five entries, including **CamoBot**; CamoBot is approved but not yet deployed on the home page.
 
 ## RBLP-003 Implementation and Verification
 
@@ -259,37 +260,39 @@ Local verification passed: all four pages at 320, 375, 768 and 1440 pixels, no h
 
 Limitations: browser viewport testing is not a physical-device or comprehensive accessibility audit. OS home-screen installation and browser chrome icon selection/cache behavior are not exercised; icon files, declarations, dimensions and browser decoding are checked. Transparent approved artwork may have less contrast on dark browser chrome; artwork has not been recolored.
 
+## RBLP-005 — CamoBot public listing
+
+Jeff approved **CamoBot** as a fifth public Red Beard Studios LLC brand/project, with exact destination `https://camobot.com`. This task is post-launch content completion and does not authorize any infrastructure change.
+
 ## AI PROJECT HANDSHAKE
 
 **Protocol Version:** 1.0
 
-**Handshake:** H-0013
+**Handshake:** H-0014
 
-**Current Owner:** CHATGPT
+**Current Owner:** CODEX
 
-**State:** LIVE — RBLP-004 COMPLETE
+**State:** READY_FOR_IMPLEMENTATION
 
-**Task ID:** RBLP-004
+**Task ID:** RBLP-005
 
 **Last Completed Action:**
-Codex completed the narrowly scoped approved branding integration after taking ownership in H-0012. Supplied Image 3 is the horizontal header lockup on all four pages; Image 2 is the RB favicon/app-icon artwork. All four originals are preserved unchanged, derived assets use only proportional sizing and transparent-margin cropping/padding, and accessible home-link/alt-text fallback is retained. Shared primary colors match the approved palette. All four approved brand links are preserved. Implementation commit `8e61703` is pushed and deployed successfully. Infrastructure, unrelated content, legal structure, analytics and tracking were not changed.
+ChatGPT recorded Jeff's approval of CamoBot as the fifth public Red Beard Studios LLC brand/project and corrected the project coordination state. The site remains launched and live under Jeff's product-owner override; CamoBot is the only outstanding post-launch content update.
 
 **Verification Results and Limitations:**
-All four pages passed 320, 375, 768 and 1440 pixel checks without horizontal overflow; header images loaded with correct proportions. Desktop/mobile visual inspection and a simulated missing-image text fallback passed. All 43 links across the four pages were reached by keyboard with visible 3-pixel focus outlines. Static semantic/link checks, exact preservation of all anchor destinations/main content/footer content, source-artwork byte comparison and text contrast checks passed (minimum tested 5.79:1). ICO and 32/180/192/512 PNG icon decoding passed. All four public pages, CSS, header logo and five icon resources returned HTTPS 200 with valid TLS and matched deployed source bytes. All four approved brand destinations returned HTTPS 200 after their existing redirects. No scripts, trackers or dependencies were introduced.
-
-Limitations: verification used browser viewports, not physical devices or a comprehensive WCAG audit. OS home-screen installation and browser chrome icon selection/cache behavior were not tested. Approved transparent artwork is unchanged and can have lower contrast on dark browser chrome. External-link checks establish current reachability only.
+RBLP-004 production verification remains valid. CamoBot has not yet been added to the home page or production deployment, so no claim is made that it is currently visible on red-beard.com. The approved destination is `https://camobot.com`; Codex must verify its current reachability/redirect behavior before deployment.
 
 **Next Required Action:**
-CHATGPT: review the live approved branding integration and this RBLP-004 verification record. Retain the current live configuration. If a further change is needed, define a new narrowly scoped task and numbered handshake before assigning CODEX ownership.
+CODEX: synchronize with `origin/main`, read H-0014 first and README.md in full, then implement RBLP-005. Add **CamoBot** to the existing home-page Brands / Projects section as the fifth approved entry, linking exactly to `https://camobot.com`. Match the existing brand-card styling and accessibility behavior. Preserve the current Red Beard Studios LLC logo, favicon, approved palette, all four existing brand links, legal content, and overall layout. Verify `https://camobot.com` before deployment and document any redirect or unexpected destination rather than silently substituting another URL. Verify responsive behavior at 320, 375, 768, and 1440 px; keyboard navigation and visible focus; all five brand links; and the production site over HTTPS after deployment. Do not modify DNS, GoDaddy, GitHub Pages configuration, HTTPS/certificates, email records, analytics, tracking, legal pages, or unrelated content. Commit and push all changes, verify the Pages deployment, update README.md to the next numbered handshake, and return Current Owner to CHATGPT with the complete required handoff fields.
 
 **Blockers:**
-None. No ambiguous artwork or remaining asset dependency.
+None. CamoBot is approved and its exact public URL is known.
 
-**Commit/Push Status:**
-Ownership commit `cf17c82` and implementation commit `8e61703` are pushed to `origin/main`; Pages deployment `34672167591` succeeded. This H-0013 documentation-only handoff is committed and pushed as the following commit, whose exact hash is reported in the final response (avoiding a self-referential commit hash).
+**Commit / Push Status:**
+This H-0014 assignment is committed directly to `main`. Codex must report its own implementation and handoff commit hashes after completing RBLP-005.
 
 **Working-tree Status:**
-Clean after the H-0013 handoff commit; local `main` synchronized with `origin/main`. Final status and remote synchronization are checked after push and reported to Jeff.
+Not applicable to ChatGPT's direct GitHub contents update. Codex must verify its local working tree is clean and synchronized with `origin/main` before handing ownership back.
 
 ## Handshake Rules
 
