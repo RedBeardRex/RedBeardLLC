@@ -39,6 +39,8 @@ h2 { font-size: 1.5rem; line-height: 1.35; font-weight: 600; letter-spacing: -.0
 .section-copy p:last-child { margin-bottom: 0; }
 .brands { list-style: none; padding: 0; margin: 0; }
 .brands li { font-size: clamp(1.25rem, 2.6vw, 1.75rem); line-height: 1.35; font-weight: 550; padding-block: 20px; border-bottom: 1px solid var(--line); }
+.brands a { display: block; color: var(--ink); text-decoration: underline; text-decoration-color: var(--red); }
+.brands a:hover { color: var(--red); }
 .brands li:first-child { padding-top: 0; }
 .brands li:last-child { border-bottom: 0; padding-bottom: 0; }
 .contact { background: var(--soft); padding: 40px; margin-block: 12px 56px; border-top: 3px solid var(--ink); }
