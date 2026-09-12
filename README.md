@@ -2,7 +2,7 @@
 
 Corporate website for **Red Beard Studios LLC**, a Montana-based company operating media, software, ecommerce, and digital product businesses.
 
-Canonical public domain: **https://Red-Beard.com**
+Canonical public domain: **https://red-beard.com**
 
 Public contact email: **info@red-beard.com**
 
@@ -22,17 +22,28 @@ This site is intentionally small. It serves as:
 
 It is not intended to be a large marketing site or creator landing page.
 
-## Approved V1 Public Brands / Projects
+## Approved Public Brands / Projects
 
-- The Den of Tools
-- 3D Print Rancher
-- Print Ranch Manager
+The following public brands/projects are approved for the corporate home page and should be presented as clickable destinations:
+
+- **The Den of Tools** — https://www.youtube.com/@denoftools
+- **3D Print Rancher** — https://www.youtube.com/@3dprintrancher
+- **Print Ranch Manager** — https://www.printranchmanager.com
+- **Coach Jeff King** — https://www.youtube.com/@CoachJeffKing
 
 Do not add experimental, private, unreleased, or other Red Beard Studios LLC projects unless Jeff explicitly approves them for public listing.
 
+### Brand-link behavior
+
+- Each approved brand name/card should link to its approved destination above.
+- Use normal accessible anchor elements with descriptive text and visible keyboard focus.
+- External destinations may open in the same tab unless there is a strong usability reason to do otherwise; do not add intrusive interstitials.
+- Do not add affiliate parameters, tracking parameters, analytics, or redirects.
+- Verify every destination before deployment and report any broken or unexpected destination rather than silently substituting another URL.
+
 ## Hosting and Infrastructure
 
-Preferred hosting: **GitHub Pages**
+Hosting: **GitHub Pages**
 
 Requirements:
 
@@ -46,11 +57,11 @@ Requirements:
 - no unnecessary JavaScript frameworks
 - no analytics or tracking by default
 - easy for Codex to maintain directly through GitHub
-- DNS may remain managed by the current registrar and point to GitHub Pages
+- DNS remains managed at the current registrar and points to GitHub Pages
 
-## V1 Site Architecture
+Production DNS is already configured and must not be changed during normal site-content work.
 
-Keep the implementation intentionally small:
+## Site Architecture
 
 ```text
 /
@@ -66,7 +77,7 @@ Keep the implementation intentionally small:
 └── README.md
 ```
 
-A separate Brands page is not required for V1. Approved brands can be presented cleanly on the home page.
+A separate Brands page is not required. Approved brands can be presented cleanly on the home page.
 
 ### Home Page
 
@@ -75,7 +86,7 @@ Include:
 - Red Beard Studios LLC corporate identity
 - concise positioning statement: a Montana-based media, software, ecommerce, and digital products company
 - brief About section
-- approved public brands/projects
+- approved public brands/projects with working links
 - public contact and business information
 - links to legal/trust pages
 - copyright notice
@@ -113,20 +124,33 @@ Avoid:
 - startup jargon
 - unnecessary sections
 
-### Identity / Logo
+## Identity / Logo
 
 Jeff confirmed the official public identity is **Red Beard Studios LLC**. This supersedes the earlier working identity **Red Beard LLC** for public-facing site branding.
 
-Jeff has supplied approved production logo artwork outside the repository, including a primary stacked logo, standalone RB monogram, horizontal lockup, and one-color black version. The preferred website treatment is the horizontal lockup in the site header and the RB monogram for favicon/app-icon use when those files are available in the implementation workspace or repository.
+Jeff has supplied approved production logo artwork outside the repository, including:
 
-Until the production logo assets are available to Codex in the repository/workspace, a restrained text-based identity remains acceptable and is not a launch blocker. Do not invent or redraw logo assets.
+- primary stacked logo
+- standalone RB monogram
+- horizontal lockup
+- one-color black version
 
-Brand direction remains premium, understated, and modern. Approved palette from the supplied brand sheets:
+Preferred web treatment when the approved files are available in the implementation workspace/repository:
+
+- horizontal lockup in the site header
+- standalone RB monogram for favicon/app-icon use
+- text fallback retained for accessibility and failure cases
+
+Do not invent, redraw, trace, or approximate the logo. If the approved files are not available to Codex, retain the current text identity and report the asset dependency.
+
+Approved palette from the supplied brand sheets:
 
 - Charcoal Black: `#111111`
 - Deep Red: `#8E1F1F`
 - Warm Ivory: `#F5F2ED`
 - Warm Gray: `#B8B0A6`
+
+Brand direction remains premium, understated, and modern.
 
 ## Technical Standards
 
@@ -154,124 +178,93 @@ Defines architecture and requirements, reviews Codex work, manages scope and pro
 **CODEX** — Implementation Engineer  
 Implements approved work in the repository, tests it, documents completed actions, and returns ownership through the handshake.
 
-## V1 Implementation and Verification
+## Implementation History
 
-Implemented on September 11, 2026 under RBLP-001; site implementation commit: `7c8f921`.
+### RBLP-001 — V1 site
 
-- Four static pages: home, privacy, terms, and accessibility; shared responsive CSS and `CNAME` containing `Red-Beard.com`.
-- Restrained text identity, all three approved public brands, approved email and mailing address, consistent navigation and copyright.
-- Semantic HTML, skip link, visible keyboard focus, descriptive page titles, descriptions, canonical URLs, and Open Graph metadata.
-- No JavaScript, framework, analytics, trackers, cookies, forms, remote fonts, or other third-party asset dependencies. Brand names are listed without links because approved destination URLs were not supplied.
-- Privacy copy describes the site's behavior and GitHub Pages security logging, with links to GitHub documentation. Legal and accessibility copy is prepared for review; accessibility wording does not claim certified conformance.
+Implemented September 11, 2026; initial implementation commit: `7c8f921`.
 
-### Local preview and maintenance
+- Four static pages: home, privacy, terms, accessibility.
+- Shared responsive CSS and CNAME.
+- Semantic structure, skip link, visible keyboard focus, metadata and canonical URLs.
+- No JavaScript framework, analytics, trackers, forms, remote fonts, or other third-party asset dependencies.
+- Initial responsive, link, keyboard and contrast checks passed.
 
-No install or build step is needed. From the repository root, run `python3 -m http.server 8765 --bind 127.0.0.1` and open `http://127.0.0.1:8765/`. Stop the server with Ctrl+C. Edit the HTML pages and `css/styles.css` directly; navigation and footer markup are shared by convention and should be kept consistent across all four pages.
+### RBLP-002 — Production launch
 
-### Verification performed
+Production is **LIVE** at **https://red-beard.com**.
 
-- Local HTTP checks: all four pages and the shared stylesheet returned HTTP 200.
-- Static checks: 37 local link, asset, and fragment references resolved; unique IDs, one main landmark and H1 per page, language and viewport declarations, canonical metadata, and absence of scripts, forms, and embeds verified.
-- Browser checks: all four pages rendered at 320, 375, 768, and 1440 CSS-pixel viewport widths without horizontal overflow. Desktop and mobile screenshots were inspected alongside rendered DOM geometry.
-- Keyboard checks: all 10 home-page links reached in logical order with visible focus; activating the skip link moved focus to main. Privacy, Terms, Accessibility, and the cross-page Brands anchor navigation worked.
-- Text contrast: all six text/background color combinations exceeded 4.5:1 (measured range 5.79:1–13.98:1).
-- `git diff --check` passed. These are basic accessibility and static-site checks, not a complete WCAG audit; screen-reader testing, browser text enlargement, and additional browser engines remain review opportunities.
+Launch milestones:
 
-### Production launch status — LIVE
+- GitHub Pages enabled from `main` at repository root.
+- Old GoDaddy YouTube forwarding removed.
+- Apex DNS set to GitHub Pages A records:
+  - `185.199.108.153`
+  - `185.199.109.153`
+  - `185.199.110.153`
+  - `185.199.111.153`
+- `www` CNAME set to `redbeardrex.github.io`.
+- Existing nameservers, MX, TXT, email, verification, unrelated subdomain, billing, ownership, privacy, renewal and security settings were preserved.
+- GitHub custom-domain certificate issued for apex and `www`.
+- HTTPS enforcement enabled.
+- Final company-name correction to **Red Beard Studios LLC** implemented in commit `e23fb2c`.
+- Deployment `34669826392` built successfully.
+- Apex and `www`, HTTP and HTTPS, required pages and stylesheet were verified with valid TLS and correct redirects/path preservation.
+- Static/link, responsive, keyboard and contrast checks passed after launch.
 
-As of **2026-09-12 03:15 UTC**, production is **LIVE** at **https://red-beard.com** under the approved public identity **Red Beard Studios LLC**. HTTPS is enforced, certificates validate for apex and www, and all required pages and CSS pass through normal public DNS. The approved logo files are not present in the repository/workspace, so the corrected temporary text identity remains in use.
+### Production protection
 
-#### H-0008 final launch and identity verification
+The GoDaddy/DNS/HTTPS launch configuration is complete and must not be repeated or modified during normal branding/content work. Any future DNS, nameserver, certificate, email-record, forwarding, registrar-account or GitHub Pages hosting change requires a new explicit authorization from Jeff through the handshake.
 
-- Updated all four HTML pages: public company references, header identity and accessible labels, titles, descriptions, Open Graph metadata, legal/privacy/accessibility copy, mailing-address company names, and copyright now say Red Beard Studios LLC. Domain, email, postal address, page structure, and approved brands are preserved. Implementation commit: `e23fb2c`.
-- No logo assets were found in the workspace/repository. No logo or monogram was redrawn. Horizontal lockup and favicon/app-icon integration remain dependent on importing Jeff's approved files. The existing accessible temporary styling remains; the documented production palette is available for the eventual logo integration.
-- Public DNS returns all four GitHub A addresses and www CNAME redbeardrex.github.io. Normal HTTP clients now reach GitHub; the previously observed stale local DNS destination is no longer blocking verification. No GoDaddy settings were changed in this pass.
-- Restarted stalled certificate provisioning by removing and immediately restoring the GitHub Pages custom-domain setting, following [GitHub's documented procedure](https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https). GitHub automatically committed CNAME removal/restoration (`2baa443`, `d13e9aa`) and normalized its value to lowercase `red-beard.com`; the domain is unchanged. Both remote commits were fast-forwarded into the workspace before the identity commit.
-- GitHub's certificate is approved for red-beard.com and www.red-beard.com, expiring December 10, 2026. Enabled HTTPS enforcement and verified the API reports `https_enforced: true`.
-- [Deployment 34669826392](https://github.com/RedBeardRex/RedBeardLLC/actions/runs/34669826392) built commit `e23fb2c` successfully. The final Pages build status is built with no error.
-- All five HTTPS apex paths (`/`, `/privacy.html`, `/terms.html`, `/accessibility.html`, `/css/styles.css`) return HTTP 200 and match local committed files byte for byte using normal DNS, without IP overrides or bypassing certificate validation.
-- All 20 combinations of HTTP/HTTPS, apex/www, and the five paths finish at the corresponding HTTPS apex path with HTTP 200 and valid TLS. During the first check, HTTP www root used an intermediate HTTP apex redirect; the full chain still reached the HTTPS apex correctly. All paths were preserved.
-- Re-ran static validation: 37 internal links/assets/fragments, unique IDs, landmarks, language, viewport and canonical metadata passed. All four pages were checked at 320, 375, 768 and 1440 pixels without horizontal overflow. Keyboard skip link retained visible focus and moved focus to main. Existing text contrast remains 5.79:1–13.98:1; no scripts, trackers or dependencies were added. These are basic accessibility checks, not a full WCAG or assistive-technology audit.
+## Current Branding Status
 
-#### H-0006 DNS changes and verification
-
-- Used the authenticated GoDaddy session for `red-beard.com`. Removed the YouTube forwarding rule after Jeff's explicit confirmation at the deletion prompt. GoDaddy now shows both domain and subdomain forwarding as **Not set up**.
-- Removing forwarding restored GoDaddy's default apex parking record and a `www` alias. Changed that apex record to `185.199.108.153`, added `185.199.109.153`, `185.199.110.153`, and `185.199.111.153`, and updated the restored `www` CNAME to `redbeardrex.github.io`. All five records use TTL 3600 (1 Hour). GoDaddy confirmed successful saves.
-- Both authoritative nameservers, `ns19.domaincontrol.com` and `ns20.domaincontrol.com`, return exactly the four GitHub apex A addresses and the `www` CNAME above. No old forwarding/parking A values remain and there are no apex AAAA records.
-- Cloudflare (`1.1.1.1`) and Google (`8.8.8.8`) DNS also return the four GitHub A values and correct `www` CNAME. Nameservers remain unchanged.
-- Reviewed all three pages of the resulting DNS table. Existing Google mail MX records, SPF/DKIM/DMARC TXT records, email CNAMEs, the `pay` subdomain, and default NS/SOA records remain present. No edits were made to those records or to any account, billing, ownership, privacy, renewal, or security settings. No wildcard records were added.
-- Re-saved the existing GitHub Pages custom domain `red-beard.com` after correcting DNS. Pages remains built from `main` at `/`; the committed `CNAME` remains `Red-Beard.com`.
-- At the GitHub IP returned by public DNS, all five HTTP paths (`/`, `/privacy.html`, `/terms.html`, `/accessibility.html`, `/css/styles.css`) return 200 and match the repository files byte for byte. HTTP `www` requests for all five paths return 301 to the matching apex HTTP path.
-- Those endpoint checks used `curl --resolve` with `185.199.108.153` because this machine's default HTTP client still connected to the cached old address `3.33.251.168` and returned 404, even after DNS queries returned the new addresses. These results establish destination readiness, not expiration of every resolver/client cache.
-- HTTPS at the GitHub destination failed hostname certificate validation for both apex and `www` at H-0007. No TLS validation was bypassed. At that time the Pages API reported `https_certificate: null` and `https_enforced: false`.
-
-The launch work pending at H-0007 was completed during H-0008 as recorded above. This subsection is historical.
-
-#### Earlier H-0004 launch record (historical)
-
-The following deployment actions and response results describe the initial launch attempt before the H-0006 DNS changes above.
-
-#### Completed launch actions
-
-- Fast-forwarded the workspace to authoritative main at `23d686d`; read H-0004 first and README.md in full.
-- Verified that the repository is public and the available GitHub credentials have administration permission. Pages was not enabled (`has_pages: false`).
-- Enabled GitHub Pages with branch publishing (`build_type: legacy`), source `main`, directory `/`. GitHub retained the custom domain `red-beard.com`; the committed `CNAME` remains exactly `Red-Beard.com`.
-- [Pages deployment 34661756167](https://github.com/RedBeardRex/RedBeardLLC/actions/runs/34661756167) completed successfully for `23d686d`. The Pages API reports `status: built` with no build error.
-- Requested HTTPS enforcement. GitHub returned HTTP 404, “The certificate does not exist yet.” Its API reports `https_certificate: null` and `https_enforced: false`. Enforcement must be retried after DNS points to GitHub and the certificate is issued.
-- No registrar settings, DNS records, site content, analytics, or dependencies were changed.
-
-#### Initial verification results (before DNS changes)
-
-| Check | Result |
-| --- | --- |
-| GitHub origin: `/`, `/privacy.html`, `/terms.html`, `/accessibility.html`, `/css/styles.css` | All HTTP 200; response bytes exactly match the committed source. Tested using `curl --resolve red-beard.com:80:185.199.108.153` to reach GitHub directly. This is an origin check, not public DNS or custom-domain HTTPS success. |
-| Public `http://red-beard.com/` and `https://red-beard.com/` | Both HTTP 301 to `http://www.youtube.com/@denoftools`; old forwarding is still active. |
-| Public HTTPS legal pages and stylesheet | All HTTP 404 from the current non-GitHub destination. |
-| `http://www.red-beard.com/` and `https://www.red-beard.com/` | DNS resolution failed. |
-| `https://redbeardrex.github.io/RedBeardLLC/` | HTTP 301 to `http://red-beard.com/`; GitHub's default URL honors the configured custom domain. |
-| TLS | Current apex forwarding endpoint and default GitHub hostname pass certificate verification. This does not verify a GitHub certificate for the custom domain. GitHub custom-domain TLS is pending. No certificate validation was bypassed. |
-| Canonical metadata | Deployed HTML matches source, including HTTPS apex canonical URLs. Public host redirects do not yet implement the desired canonical behavior. |
-
-#### Exact GoDaddy changes — explicitly authorized by Jeff
-
-Jeff authorized and Codex completed the following production DNS and forwarding changes in GoDaddy for `red-beard.com`. These steps are historical and **must not be repeated** unless a new problem is discovered and ChatGPT/Jeff explicitly authorizes a correction.
-
-| Type | Name / Host | Value / Points to | TTL |
-| --- | --- | --- | --- |
-| A | @ | 185.199.108.153 | 1 hour |
-| A | @ | 185.199.109.153 | 1 hour |
-| A | @ | 185.199.110.153 | 1 hour |
-| A | @ | 185.199.111.153 | 1 hour |
-| CNAME | www | redbeardrex.github.io | 1 hour |
-
-Existing nameservers, MX, TXT, email, verification, unrelated subdomain, billing, ownership, privacy, renewal, and security settings were left unchanged.
+- Public company identity: **Red Beard Studios LLC** — deployed.
+- Domain: **https://red-beard.com** — live with HTTPS enforced.
+- Approved logo artwork: supplied to ChatGPT in the project conversation, but not yet confirmed present in the Codex workspace/repository.
+- Temporary text identity: currently acceptable until approved files are imported.
+- Approved brand destinations: now supplied and locked above.
+- Approved public brand list now contains four entries, including **Coach Jeff King**.
 
 ## AI PROJECT HANDSHAKE
 
 **Protocol Version:** 1.0
 
-**Handshake:** H-0009
+**Handshake:** H-0010
 
-**Current Owner:** CHATGPT
+**Current Owner:** CODEX
 
-**State:** LIVE
+**State:** READY_FOR_BRAND_POLISH
 
-**Task ID:** RBLP-002
+**Task ID:** RBLP-003
 
-**Last Completed Action:**
-Codex synchronized with H-0008, read the handshake first and README.md in full, updated every public company-name reference and metadata field to Red Beard Studios LLC, and published implementation commit e23fb2c. Restarted stalled GitHub certificate provisioning, enabled HTTPS enforcement after issuance, and verified the successful deployment. All five HTTPS apex resources match the committed source; all 20 host/scheme/path combinations reach the correct HTTPS apex URL with valid TLS. Static/link, responsive and keyboard accessibility checks passed. No GoDaddy changes were repeated. Logo assets were absent, so the corrected temporary text identity remains. Full handoff requirements were added to the protocol at Jeff's request.
+**Last Completed Action:**  
+ChatGPT reviewed H-0009 after successful production launch. Jeff supplied the approved public destination URLs for The Den of Tools, 3D Print Rancher, Print Ranch Manager, and a newly approved fourth public channel, Coach Jeff King. ChatGPT validated the canonical The Den of Tools YouTube handle as `https://www.youtube.com/@denoftools` and recorded all four destinations in this README. The site remains LIVE and no infrastructure change is required.
 
-**Verification:**
-Production is LIVE as of 2026-09-12 03:15 UTC. Pages builds from main at /, certificate covers apex and www, and HTTPS enforcement is enabled. HTTP 200, source equality, normal DNS, valid TLS, complete redirect chains, path preservation, 37 local links and four responsive widths passed. See the H-0008 verification record above for exact scope and limitations.
+**Verification:**  
+RBLP-002 launch verification remains valid: production is live at `https://red-beard.com`, HTTPS is enforced, apex/www behavior and required resources passed. No DNS, GoDaddy, certificate or hosting changes are required for RBLP-003. The four destination URLs are authoritative product inputs for the next implementation pass; Codex must verify each reachable destination as part of implementation.
 
-**Branding Status:**
-Text and metadata identity correction is complete and deployed. Approved horizontal lockup and RB monogram integration are pending asset import; no replacement artwork was invented.
+**Branding Status:**  
+Public text identity is Red Beard Studios LLC. Approved horizontal lockup and RB monogram exist outside the repository but may still need to be imported into the Codex workspace/repository. Approved brand links are now available. The approved public brand list is The Den of Tools, 3D Print Rancher, Print Ranch Manager, and Coach Jeff King.
 
-**Next Required Action:**
-ChatGPT must synchronize with main, read H-0009 first and README.md in full, review the live Red Beard Studios LLC site, and report launch completion to Jeff. Obtain/import the approved horizontal lockup and RB monogram files into the repository/workspace, then issue a separately scoped branding task through the next numbered handshake for header and favicon/app-icon integration using the approved palette. Approved brand destination URLs can be handled in a later scoped task. Do not repeat completed GoDaddy or HTTPS configuration.
+**Next Required Action:**  
+Codex must synchronize to `main`, read H-0010 first and README.md in full, then perform RBLP-003 as a narrowly scoped branding/polish pass:
 
-**Blockers:**
-No launch blockers remain. Approved logo files are not available in the repository/workspace; this blocks only logo/favicon integration. Approved brand destination URLs remain a non-blocking future input.
+1. Update the home-page brands section so all four approved brands/projects are present and clickable using exactly these destinations:
+   - The Den of Tools → `https://www.youtube.com/@denoftools`
+   - 3D Print Rancher → `https://www.youtube.com/@3dprintrancher`
+   - Print Ranch Manager → `https://www.printranchmanager.com`
+   - Coach Jeff King → `https://www.youtube.com/@CoachJeffKing`
+2. Preserve semantic HTML, keyboard accessibility, visible focus, responsive behavior, and the current restrained premium design.
+3. Verify all four external destinations before deployment. If one is unreachable or clearly wrong, do not invent a substitute; report the exact issue in the handoff.
+4. If Jeff's approved production logo files are available in the workspace/repository, import them into sensible `assets/` paths, use the horizontal lockup in the header and the RB monogram for favicon/app-icon use, preserving accessible text/fallback behavior. Do not redraw or approximate the artwork.
+5. If the logo files are not available to Codex, leave the current text identity in place and mark logo integration as the only remaining non-blocking dependency.
+6. Do not change GoDaddy, DNS, nameservers, MX/TXT records, GitHub Pages source/domain settings, certificates, HTTPS enforcement, analytics/tracking behavior, or unrelated site scope.
+7. Run link/static checks, responsive checks at the existing widths, keyboard/focus checks, and a public production smoke test after deployment.
+8. Commit and push all approved changes to `main`.
+9. Update README to H-0011 with Current Owner CHATGPT and report exact implementation, verification, commit/push status, working-tree status, and any remaining blocker/dependency.
+
+**Blockers:**  
+No blocker for adding the four brand links. Logo/header/favicon integration is blocked only if the approved image files are not available in the Codex workspace/repository. This asset dependency is non-blocking for the link update and must not delay deployment of the approved brand links.
 
 ## Handshake Rules
 
