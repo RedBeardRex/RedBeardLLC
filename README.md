@@ -128,14 +128,14 @@ Avoid:
 
 Jeff confirmed the official public identity is **Red Beard Studios LLC**. This supersedes the earlier working identity **Red Beard LLC** for public-facing site branding.
 
-Jeff has supplied approved production logo artwork outside the repository, including:
+Jeff supplied approved production logo artwork, now preserved unchanged in `assets/brand/originals/`, including:
 
 - primary stacked logo
 - standalone RB monogram
 - horizontal lockup
 - one-color black version
 
-Preferred web treatment when the approved files are available in the implementation workspace/repository:
+Implemented web treatment:
 
 - horizontal lockup in the site header
 - standalone RB monogram for favicon/app-icon use
@@ -220,8 +220,9 @@ The GoDaddy/DNS/HTTPS launch configuration is complete and must not be repeated 
 
 - Public company identity: **Red Beard Studios LLC** — deployed.
 - Domain: **https://red-beard.com** — live with HTTPS enforced.
-- Approved logo artwork: supplied to ChatGPT in the project conversation, but not yet confirmed present in the Codex workspace/repository.
-- Temporary text identity: currently acceptable until approved files are imported.
+- Approved logo artwork: identified and imported for RBLP-004; Image 3 is the horizontal lockup and Image 2 is the color RB monogram.
+- Header identity: approved horizontal lockup with native alt-text failure fallback and an accessible home-link name.
+- Icons: approved RB monogram in ICO and PNG sizes; no artwork recoloring or redrawing.
 - Approved brand destinations: now supplied and locked above.
 - Approved public brand list now contains four entries, including **Coach Jeff King**.
 
@@ -236,6 +237,27 @@ Static checks passed for all four local pages, 37 internal link/asset/fragment r
 After deployment, all four production HTTPS pages and CSS returned 200 and matched the local committed source byte for byte through normal DNS with valid TLS. All 15 alternate HTTP/apex/www combinations redirected to the corresponding HTTPS apex paths. This production content comparison confirms that the new links and CSS are deployed. No Pages source/domain, certificate, HTTPS, DNS, registrar, or email settings were changed.
 
 No approved image files were found in the workspace/repository. Text identity remains in place. Approved horizontal lockup and RB monogram import is the only remaining non-blocking branding dependency.
+
+## RBLP-004 — Approved logo integration
+
+Ownership began at H-0012 (Protocol 1.0, CODEX, IN_PROGRESS), committed as `cf17c82`, following H-0011 and Jeff's explicit branding-only assignment.
+
+All four supplied PNG originals are preserved byte for byte in `assets/brand/originals/`. Image 3 (`08_25_27 PM (3).png`) is unambiguously the horizontal lockup; Image 2 (`08_25_27 PM (2).png`) is the standalone color RB monogram. The two stacked variants are retained as originals only.
+
+Asset preparation used deterministic Pillow crop/resize operations, without generative editing, tracing, redrawing, recoloring, filters, or aspect-ratio distortion:
+
+- Horizontal original: 2172 × 724; alpha bounding box `(81, 160, 2114, 674)` cropped, then proportionally reduced to 1000 × 253 in `assets/brand/horizontal-lockup.png`. Every nontransparent source pixel is inside the crop.
+- Monogram original: 1254 × 1254; alpha bounding box `(61, 130, 1192, 1228)` cropped and centered on a transparent 1257 × 1257 canvas, providing approximately 5% margin on each side. Derived PNGs are 32, 180, 192 and 512 pixels; root `favicon.ico` contains 16, 32 and 48 pixel frames.
+- Original horizontal SHA-256: `9a8f1ca86adcb6cb784cd2e7452a7a593db06f4345ec98862448e28240a50760`.
+- Original monogram SHA-256: `bb56091fe27d5ee6eeef93cd39f3ee18ba0d1920a1f8c486bbd1dda1c82d8663`.
+
+Every page uses the horizontal image inside the existing home link, with `alt="Red Beard Studios LLC"` and the existing accessible home-link label. A 320-pixel maximum display width scales down proportionally on narrow screens. Native image-failure text was visually verified at 320 pixels by temporarily withholding the local image, then restoring it. No JavaScript fallback is needed. Icon declarations are present on all four pages, including the 180-pixel Apple touch icon. No app installation or service-worker functionality was added.
+
+The shared primary colors now match the approved charcoal, deep red, warm ivory and warm gray tokens; existing readable muted text and subtle contact-panel background remain. The artwork itself retains its supplied colors. All four approved brand links and unrelated page content are unchanged. No DNS, registrar, Pages configuration, HTTPS, certificates, email records, analytics, tracking, legal structure, scripts or dependencies were changed or introduced.
+
+Local verification passed: all four pages at 320, 375, 768 and 1440 pixels, no horizontal overflow, correctly loaded proportional header images; desktop/mobile visual inspection; all 14 home-page links reached by keyboard with 3-pixel visible focus; 57 local link/asset/fragment references; landmarks/metadata/unique IDs; no scripts/forms/embeds; all local pages/CSS return 200. Browser decoding passed for ICO and every PNG icon at its declared dimensions. Text contrast is at least 5.79:1 for tested foreground/background combinations. Production verification is pending deployment.
+
+Limitations: browser viewport testing is not a physical-device or comprehensive accessibility audit. OS home-screen installation and browser chrome icon selection/cache behavior are not exercised; icon files, declarations, dimensions and browser decoding are checked. Transparent approved artwork may have less contrast on dark browser chrome; artwork has not been recolored.
 
 ## AI PROJECT HANDSHAKE
 

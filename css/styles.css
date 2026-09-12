@@ -1,10 +1,10 @@
 :root {
   color-scheme: light;
-  --paper: #fafaf8;
-  --ink: #222a2d;
+  --paper: #F5F2ED;
+  --ink: #111111;
   --muted: #555e62;
-  --red: #9e342b;
-  --line: #d5d8d5;
+  --red: #8E1F1F;
+  --line: #B8B0A6;
   --soft: #eef0ed;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 100%;
@@ -20,8 +20,8 @@ a:focus-visible, main:focus-visible { outline: 3px solid var(--red); outline-off
 a { overflow-wrap: anywhere; }
 .wrap { width: min(1120px, calc(100% - 96px)); margin-inline: auto; }
 .site-header { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding-block: 30px; border-bottom: 1px solid var(--line); }
-.wordmark { color: var(--ink); text-decoration: none; font-size: 1.65rem; font-weight: 750; letter-spacing: -.055em; }
-.llc { margin-left: .65em; font-size: .75rem; font-weight: 600; letter-spacing: .12em; color: var(--red); }
+.wordmark { display: block; width: 320px; max-width: 100%; flex-shrink: 0; color: var(--ink); text-decoration: none; font-size: 1rem; font-weight: 600; }
+.wordmark img { display: block; width: 100%; height: auto; }
 nav { display: flex; flex-wrap: wrap; gap: 8px 28px; }
 nav a { color: var(--ink); font-size: .9375rem; padding-block: 10px; text-decoration: none; }
 nav a:hover, nav a[aria-current] { text-decoration: underline; }
