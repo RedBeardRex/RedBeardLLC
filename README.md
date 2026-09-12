@@ -1,6 +1,6 @@
-# Red Beard LLC Corporate Landing Page
+# Red Beard Studios LLC Corporate Landing Page
 
-Corporate website for **Red Beard LLC**, a Montana-based company operating media, software, ecommerce, and digital product businesses.
+Corporate website for **Red Beard Studios LLC**, a Montana-based company operating media, software, ecommerce, and digital product businesses.
 
 Canonical public domain: **https://Red-Beard.com**
 
@@ -15,9 +15,9 @@ Livingston, MT 59047
 
 This site is intentionally small. It serves as:
 
-- the public corporate home for Red Beard LLC;
+- the public corporate home for Red Beard Studios LLC;
 - proof of legitimacy for customers, partners, payment providers, OAuth providers, and other services;
-- the canonical parent-company identity for approved Red Beard LLC products and brands;
+- the canonical parent-company identity for approved Red Beard Studios LLC products and brands;
 - a stable location for company contact and legal information.
 
 It is not intended to be a large marketing site or creator landing page.
@@ -28,7 +28,7 @@ It is not intended to be a large marketing site or creator landing page.
 - 3D Print Rancher
 - Print Ranch Manager
 
-Do not add experimental, private, unreleased, or other Red Beard LLC projects unless Jeff explicitly approves them for public listing.
+Do not add experimental, private, unreleased, or other Red Beard Studios LLC projects unless Jeff explicitly approves them for public listing.
 
 ## Hosting and Infrastructure
 
@@ -72,7 +72,7 @@ A separate Brands page is not required for V1. Approved brands can be presented 
 
 Include:
 
-- Red Beard LLC corporate identity
+- Red Beard Studios LLC corporate identity
 - concise positioning statement: a Montana-based media, software, ecommerce, and digital products company
 - brief About section
 - approved public brands/projects
@@ -90,7 +90,7 @@ Include:
 - Contact information
 - Copyright notice
 
-Add an affiliate disclosure only if the Red Beard LLC corporate site itself contains affiliate links.
+Add an affiliate disclosure only if the Red Beard Studios LLC corporate site itself contains affiliate links.
 
 Do not add GDPR, CCPA, cookie-consent, or similar compliance UI unless the site's actual behavior or legal requirements make it necessary.
 
@@ -115,9 +115,18 @@ Avoid:
 
 ### Identity / Logo
 
-An official Red Beard LLC logo is being completed and will be supplied later.
+Jeff confirmed the official public identity is **Red Beard Studios LLC**. This supersedes the earlier working identity **Red Beard LLC** for public-facing site branding.
 
-The logo is **not a blocker** for initial implementation. Until the approved logo is available, use a restrained text-based **Red Beard LLC** identity that can be replaced cleanly without redesigning the site.
+Jeff has supplied approved production logo artwork outside the repository, including a primary stacked logo, standalone RB monogram, horizontal lockup, and one-color black version. The preferred website treatment is the horizontal lockup in the site header and the RB monogram for favicon/app-icon use when those files are available in the implementation workspace or repository.
+
+Until the production logo assets are available to Codex in the repository/workspace, a restrained text-based identity remains acceptable and is not a launch blocker. Do not invent or redraw logo assets.
+
+Brand direction remains premium, understated, and modern. Approved palette from the supplied brand sheets:
+
+- Charcoal Black: `#111111`
+- Deep Red: `#8E1F1F`
+- Warm Ivory: `#F5F2ED`
+- Warm Gray: `#B8B0A6`
 
 ## Technical Standards
 
@@ -170,7 +179,7 @@ No install or build step is needed. From the repository root, run `python3 -m ht
 
 ### Production launch status — PARTIALLY_LIVE
 
-The authorized H-0006 GoDaddy changes are saved. As of **2026-09-12 00:51 UTC** (September 11, America/Denver), authoritative DNS and public resolvers return GitHub Pages addresses. GitHub serves the correct site over HTTP, but its custom-domain certificate has not been issued and HTTPS enforcement remains unavailable. Production is **PARTIALLY_LIVE**; do not mark LIVE until HTTPS and all canonical redirects pass.
+The authorized H-0006 GoDaddy changes are saved. As of **2026-09-12 00:51 UTC** (September 11, America/Denver), authoritative DNS and public resolvers return GitHub Pages addresses. GitHub serves the correct site over HTTP, but its custom-domain certificate had not yet been issued and HTTPS enforcement remained unavailable. Production remains **PARTIALLY_LIVE** until Codex completes H-0008 verification and records LIVE.
 
 #### H-0006 DNS changes and verification
 
@@ -182,9 +191,9 @@ The authorized H-0006 GoDaddy changes are saved. As of **2026-09-12 00:51 UTC** 
 - Re-saved the existing GitHub Pages custom domain `red-beard.com` after correcting DNS. Pages remains built from `main` at `/`; the committed `CNAME` remains `Red-Beard.com`.
 - At the GitHub IP returned by public DNS, all five HTTP paths (`/`, `/privacy.html`, `/terms.html`, `/accessibility.html`, `/css/styles.css`) return 200 and match the repository files byte for byte. HTTP `www` requests for all five paths return 301 to the matching apex HTTP path.
 - Those endpoint checks used `curl --resolve` with `185.199.108.153` because this machine's default HTTP client still connected to the cached old address `3.33.251.168` and returned 404, even after DNS queries returned the new addresses. These results establish destination readiness, not expiration of every resolver/client cache.
-- HTTPS at the GitHub destination fails hostname certificate validation for both apex and `www`. No TLS validation was bypassed. At 00:51 UTC the Pages API still reported `https_certificate: null` and `https_enforced: false`; the enforcement request returned HTTP 404, “The certificate does not exist yet.” HTTPS canonical redirects cannot be verified until issuance and enforcement succeed.
+- HTTPS at the GitHub destination failed hostname certificate validation for both apex and `www` at H-0007. No TLS validation was bypassed. At that time the Pages API reported `https_certificate: null` and `https_enforced: false`.
 
-Remaining work: allow DNS/client caches and GitHub certificate provisioning to finish; verify certificate coverage for apex and `www`; enable HTTPS enforcement; then verify all five paths through normal public DNS, HTTP-to-HTTPS redirects, and `www`-to-apex redirects preserving paths. No additional GoDaddy changes or product approval are currently needed.
+Remaining launch work: verify DNS/client-cache propagation and GitHub certificate provisioning; enable HTTPS enforcement when available; then verify all five paths through normal public DNS, HTTP-to-HTTPS redirects, and `www`-to-apex redirects preserving paths. No additional GoDaddy changes or product approval are required.
 
 #### Earlier H-0004 launch record (historical)
 
@@ -213,11 +222,7 @@ The following deployment actions and response results describe the initial launc
 
 #### Exact GoDaddy changes — explicitly authorized by Jeff
 
-Jeff has explicitly authorized Codex to make the following production DNS and forwarding changes in GoDaddy for `red-beard.com` if Codex can access an authenticated GoDaddy session. This authorization is limited to the changes listed here. Do not change nameservers, MX records, email-related TXT records, unrelated subdomains, billing settings, domain ownership, privacy settings, renewals, or any other registrar/account configuration.
-
-1. Open the DNS settings for `red-beard.com`.
-2. Remove the existing domain forwarding to `http://www.youtube.com/@denoftools` and any corresponding `www` forwarding if present.
-3. Replace the current apex A records `15.197.225.128` and `3.33.251.168` with these four GitHub Pages A records:
+Jeff authorized and Codex completed the following production DNS and forwarding changes in GoDaddy for `red-beard.com`. These steps are historical and **must not be repeated** unless a new problem is discovered and ChatGPT/Jeff explicitly authorizes a correction.
 
 | Type | Name / Host | Value / Points to | TTL |
 | --- | --- | --- | --- |
@@ -227,37 +232,28 @@ Jeff has explicitly authorized Codex to make the following production DNS and fo
 | A | @ | 185.199.111.153 | 1 hour |
 | CNAME | www | redbeardrex.github.io | 1 hour |
 
-4. Ensure there are no old forwarding A values, no conflicting `www` A/AAAA/CNAME records, and only one `www` CNAME.
-5. Leave existing nameservers `ns19.domaincontrol.com` and `ns20.domaincontrol.com` unchanged.
-6. Leave all unrelated MX, TXT, email, verification, and subdomain records unchanged.
-7. Do not add apex AAAA records or wildcard records.
-8. If GoDaddy presents any ambiguous destructive warning, requests a nameserver change, requires a purchase, changes email service, or presents a setting outside the exact scope above, stop and return control to CHATGPT/JEFF rather than proceeding.
-9. If login or MFA is required and Jeff must complete it interactively, pause only for that authentication step and continue afterward without requesting a new product authorization.
-10. After saving the DNS changes, verify authoritative DNS propagation. Once GitHub issues the custom-domain certificate, enable **Enforce HTTPS** in GitHub Pages.
-11. Verify all four pages and CSS at `https://red-beard.com`; verify HTTP redirects to HTTPS and both `www` schemes redirect to the HTTPS apex while preserving paths. Record LIVE only after those checks pass.
-
-Public registry RDAP identifies the registrar as **GoDaddy.com, LLC**. The authoritative nameservers are `ns19.domaincontrol.com` and `ns20.domaincontrol.com`. Authoritative DNS before this authorization returned apex A records `15.197.225.128` and `3.33.251.168` with TTL 3600; there were no apex AAAA records and no `www` A, AAAA, or CNAME answers.
+Existing nameservers, MX, TXT, email, verification, unrelated subdomain, billing, ownership, privacy, renewal, and security settings were left unchanged.
 
 ## AI PROJECT HANDSHAKE
 
 **Protocol Version:** 1.0
 
-**Handshake:** H-0007
+**Handshake:** H-0008
 
-**Current Owner:** CHATGPT
+**Current Owner:** CODEX
 
-**State:** PARTIALLY_LIVE
+**State:** READY_FOR_FINAL_LAUNCH_VERIFICATION
 
 **Task ID:** RBLP-002
 
 **Last Completed Action:**
-Codex completed the GoDaddy changes authorized in H-0006 and confirmed by Jeff: removed the old YouTube forwarding, replaced the restored parking A record with the first GitHub address, added the remaining three GitHub A addresses, and set www CNAME to redbeardrex.github.io, all with one-hour TTLs. Both authoritative nameservers plus Cloudflare and Google DNS confirm the exact records. Unrelated records and account settings were not edited. GitHub serves all four pages and CSS with exact source matches over HTTP; www HTTP redirects preserve all tested paths. Custom-domain certificate issuance is still pending; HTTPS enforcement returned HTTP 404 because the certificate does not exist yet. Production is PARTIALLY_LIVE, with detailed verification and cache limitations recorded above.
+ChatGPT reviewed H-0007 and accepted Codex's completed GoDaddy changes. No further registrar changes are currently required. Jeff also confirmed the official public identity is **Red Beard Studios LLC**, superseding the earlier working name **Red Beard LLC**, and supplied approved logo assets outside the repository. ChatGPT updated the authoritative charter and brand direction accordingly.
 
 **Next Required Action:**
-ChatGPT must read H-0007 first and README.md in full, then assign CODEX the remaining verification through the next numbered handshake: check DNS/client-cache propagation and GitHub certificate issuance; enable HTTPS enforcement when available; verify valid apex/www certificates, all four public pages and CSS through normal DNS, HTTP-to-HTTPS redirects, and www-to-HTTPS-apex redirects preserving paths. Record LIVE only when all checks pass. Do not repeat the completed registrar changes. Existing launch authorization remains valid and no further product approval is needed.
+Codex must synchronize to main, read H-0008 first and README.md in full, and continue without repeating any GoDaddy changes. First, check current public DNS/client-cache behavior and GitHub Pages custom-domain certificate status. When the certificate exists, enable Enforce HTTPS. Verify valid TLS for both `red-beard.com` and `www.red-beard.com`; verify `/`, `/privacy.html`, `/terms.html`, `/accessibility.html`, and `/css/styles.css` through normal public DNS; verify HTTP redirects to HTTPS and both www schemes redirect to the HTTPS apex while preserving paths. If all launch checks pass, update production status to LIVE. As part of the same implementation pass, update all public-facing site text, page titles, descriptions, Open Graph metadata, legal-page references, footer/copyright text, and accessibility/privacy references from **Red Beard LLC** to **Red Beard Studios LLC**. Preserve domain, email, address, scope, and legal/trust structure. If the approved logo files are present in the workspace or repository, integrate the horizontal lockup into the header and the RB monogram as favicon/app-icon assets using the documented brand palette; if the files are not available to Codex, do not redraw them—complete the text/metadata identity update, record the missing asset-import dependency, and leave the temporary text identity in place. Re-run static/link/accessibility checks after any content/branding changes. Commit and push all work, then advance to the next handshake with Current Owner CHATGPT and an exact launch/branding status.
 
 **Blockers:**
-GitHub custom-domain certificate issuance and expiry of stale client/resolver DNS caches remain pending. HTTPS is not yet validated and enforcement is not enabled. Registrar access and DNS editing are complete; there are no remaining manual GoDaddy steps identified. Official logo and approved brand destination URLs remain non-blocking post-launch items.
+Potential remaining launch blocker: GitHub certificate issuance / stale client cache. Logo files may not yet be present in the repository or Codex workspace; this is non-blocking for HTTPS launch and text/metadata identity correction. No further GoDaddy work is authorized or required at this time.
 
 ## Handshake Rules
 
