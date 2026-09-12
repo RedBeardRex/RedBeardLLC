@@ -170,30 +170,28 @@ No install or build step is needed. From the repository root, run `python3 -m ht
 
 ### Production launch status
 
-Production launch requires Jeff's approval under this charter. No Pages settings, DNS records, or HTTPS settings were changed. A read-only GitHub Pages settings lookup returned HTTP 404; this does not establish whether Pages is unconfigured or inaccessible to the current credentials. Production domain behavior and HTTPS have not been verified.
-
-After approval, verify or enable GitHub Pages for this repository using `main` and the repository root, confirm custom-domain ownership and DNS for `Red-Beard.com`, and verify HTTPS and every public page. Confirm the privacy wording against the actual hosting and email-handling practices before launch. The pending official logo remains non-blocking for implementation.
+Jeff authorized production launch on September 11, 2026. GitHub Pages, DNS, custom-domain behavior, and HTTPS still require configuration and verification. The official logo remains a non-blocking post-launch asset update.
 
 ## AI PROJECT HANDSHAKE
 
 **Protocol Version:** 1.0
 
-**Handshake:** H-0003
+**Handshake:** H-0004
 
-**Current Owner:** CHATGPT
+**Current Owner:** CODEX
 
-**State:** READY_FOR_REVIEW
+**State:** AUTHORIZED_FOR_LAUNCH
 
-**Task ID:** RBLP-001
+**Task ID:** RBLP-002
 
 **Last Completed Action:**  
-Codex synchronized the existing workspace with the authoritative remote main, read H-0002 first and README.md in full, and implemented the complete V1 static corporate website in commit `7c8f921`, which was pushed to main. The implementation includes index.html, privacy.html, terms.html, accessibility.html, css/styles.css, and CNAME for Red-Beard.com. The approved text identity, three public brands, contact information, legal pages, responsive layout, keyboard support, and basic metadata are present. Local link, HTTP, responsive, keyboard, and contrast checks passed as detailed above. No implementation blockers remain. This H-0003 handoff returns ownership to ChatGPT for review.
+ChatGPT reviewed the complete V1 implementation against the project charter and approved it without revision. Jeff explicitly authorized production launch on September 11, 2026. The production-launch gate is therefore cleared.
 
 **Next Required Action:**  
-ChatGPT must synchronize with main, read H-0003 first and README.md in full, review the V1 implementation and verification against the charter, and present it to Jeff for public identity, content, legal/privacy wording, and production-launch approval. Confirm that the privacy wording matches actual hosting and email practices. Obtain approved brand destination URLs if links are desired and the official logo when available. After review, either record approval and assign a clearly scoped launch task or issue a specific revision task to CODEX through the next numbered handshake. Do not launch or change hosting/DNS settings before Jeff approves production launch.
+Codex must synchronize with the latest main branch, read H-0004 first and README.md in full, and execute the production-launch task. Verify whether GitHub Pages can be enabled/configured for this repository from the available environment. If possible, configure GitHub Pages to publish from the `main` branch repository root and preserve the existing `CNAME` for `Red-Beard.com`. Determine the exact DNS records required at the current registrar for both the apex domain and `www` if appropriate, but do not invent or assume registrar changes. If registrar access is unavailable, return the exact records and step-by-step changes Jeff must make manually. After DNS is in place or once a manual registrar step is the only blocker, verify the public domain, redirects/canonical host behavior, all four pages, CSS assets, and HTTPS. Do not add analytics, tracking, frameworks, cookie banners, or unapproved content. Record all launch actions, verification results, and any remaining manual DNS/registrar requirements in this README, increment the handshake, return Current Owner to CHATGPT, and clearly state whether production is LIVE, PARTIALLY_LIVE, or BLOCKED_ON_DNS.
 
 **Blockers:**  
-None for the completed V1 implementation. Production launch awaits Jeff's approval and verification/configuration of GitHub Pages, DNS, and HTTPS. The Pages settings lookup returned HTTP 404, so hosting configuration remains unconfirmed. Official logo and approved brand destination URLs are pending, non-blocking items for review.
+No product or implementation blockers. GitHub Pages configuration permissions and registrar/DNS access are unconfirmed. Official logo and brand destination URLs remain non-blocking post-launch items.
 
 ## Handshake Rules
 
