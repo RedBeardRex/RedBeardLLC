@@ -168,30 +168,74 @@ No install or build step is needed. From the repository root, run `python3 -m ht
 - Text contrast: all six text/background color combinations exceeded 4.5:1 (measured range 5.79:1–13.98:1).
 - `git diff --check` passed. These are basic accessibility and static-site checks, not a complete WCAG audit; screen-reader testing, browser text enlargement, and additional browser engines remain review opportunities.
 
-### Production launch status
+### Production launch status — BLOCKED_ON_DNS
 
-Jeff authorized production launch on September 11, 2026. GitHub Pages, DNS, custom-domain behavior, and HTTPS still require configuration and verification. The official logo remains a non-blocking post-launch asset update.
+Launch task RBLP-002 was executed on September 11, 2026 (America/Denver), following Jeff's approval in H-0004. GitHub deployment succeeded; the canonical public domain is still using the old forwarding service. Production is **BLOCKED_ON_DNS**, not live at the intended domain.
+
+#### Completed launch actions
+
+- Fast-forwarded the workspace to authoritative main at `23d686d`; read H-0004 first and README.md in full.
+- Verified that the repository is public and the available GitHub credentials have administration permission. Pages was not enabled (`has_pages: false`).
+- Enabled GitHub Pages with branch publishing (`build_type: legacy`), source `main`, directory `/`. GitHub retained the custom domain `red-beard.com`; the committed `CNAME` remains exactly `Red-Beard.com`.
+- [Pages deployment 34661756167](https://github.com/RedBeardRex/RedBeardLLC/actions/runs/34661756167) completed successfully for `23d686d`. The Pages API reports `status: built` with no build error.
+- Requested HTTPS enforcement. GitHub returned HTTP 404, “The certificate does not exist yet.” Its API reports `https_certificate: null` and `https_enforced: false`. Enforcement must be retried after DNS points to GitHub and the certificate is issued.
+- No registrar settings, DNS records, site content, analytics, or dependencies were changed.
+
+#### Verification results
+
+| Check | Result |
+| --- | --- |
+| GitHub origin: `/`, `/privacy.html`, `/terms.html`, `/accessibility.html`, `/css/styles.css` | All HTTP 200; response bytes exactly match the committed source. Tested using `curl --resolve red-beard.com:80:185.199.108.153` to reach GitHub directly. This is an origin check, not public DNS or custom-domain HTTPS success. |
+| Public `http://red-beard.com/` and `https://red-beard.com/` | Both HTTP 301 to `http://www.youtube.com/@denoftools`; old forwarding is still active. |
+| Public HTTPS legal pages and stylesheet | All HTTP 404 from the current non-GitHub destination. |
+| `http://www.red-beard.com/` and `https://www.red-beard.com/` | DNS resolution failed. |
+| `https://redbeardrex.github.io/RedBeardLLC/` | HTTP 301 to `http://red-beard.com/`; GitHub's default URL honors the configured custom domain. |
+| TLS | Current apex forwarding endpoint and default GitHub hostname pass certificate verification. This does not verify a GitHub certificate for the custom domain. GitHub custom-domain TLS is pending. No certificate validation was bypassed. |
+| Canonical metadata | Deployed HTML matches source, including HTTPS apex canonical URLs. Public host redirects do not yet implement the desired canonical behavior. |
+
+#### Exact manual GoDaddy changes
+
+Public registry RDAP identifies the registrar as **GoDaddy.com, LLC**. The authoritative nameservers are `ns19.domaincontrol.com` and `ns20.domaincontrol.com`. Authoritative DNS currently returns apex A records `15.197.225.128` and `3.33.251.168` with TTL 3600; there are no apex AAAA records and no `www` A, AAAA, or CNAME answers. No connected registrar tool or open registrar session was available, so the following changes remain for Jeff.
+
+1. Sign in to GoDaddy, open **Domain Portfolio**, select **red-beard.com**, and open **DNS**.
+2. Under **Forwarding**, remove the domain forwarding to `http://www.youtube.com/@denoftools` (and any `www` forwarding if present). The current public redirect was verified; the account's exact forwarding settings were not accessible. If forwarding locks the current A records, remove forwarding first, then reopen DNS records.
+3. Replace the two old apex A values, `15.197.225.128` and `3.33.251.168`, with the four GitHub Pages A records below. Add the `www` CNAME. Ensure the final set has all four A values, no old forwarding A values, and only one CNAME for `www`.
+
+| Type | Name / Host | Value / Points to | TTL |
+| --- | --- | --- | --- |
+| A | @ | 185.199.108.153 | 1 hour |
+| A | @ | 185.199.109.153 | 1 hour |
+| A | @ | 185.199.110.153 | 1 hour |
+| A | @ | 185.199.111.153 | 1 hour |
+| CNAME | www | redbeardrex.github.io | 1 hour |
+
+4. Save the records. The CNAME target is only `redbeardrex.github.io`, with no `https://` prefix and no `/RedBeardLLC` path. Leave the existing nameservers and unrelated MX, TXT, email, and subdomain records unchanged. No apex AAAA records are required for this IPv4 configuration; do not add conflicting apex addresses or a wildcard record.
+5. Confirm the new A records and `www` CNAME have propagated. GoDaddy advises that changes commonly take effect within an hour but may take up to 48 hours globally.
+6. Open [repository Pages settings](https://github.com/RedBeardRex/RedBeardLLC/settings/pages). Keep **Deploy from a branch → main → / (root)** and custom domain **red-beard.com**. Once the DNS check succeeds and GitHub issues the certificate, enable **Enforce HTTPS**. GitHub advises HTTPS availability may take up to an hour after correct custom-domain configuration.
+7. Return the task for verification: all four pages and CSS must load over `https://red-beard.com`; HTTP must redirect to HTTPS; both `www` schemes must reach the HTTPS apex, preserving paths; certificates must validate for apex and `www`. Then record LIVE in a new handshake.
+
+DNS values and expected apex/`www` redirects were checked against [GitHub custom-domain documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) and [GitHub HTTPS guidance](https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https). GoDaddy's [A record instructions](https://www.godaddy.com/en-uk/help/add-or-edit-an-a-record-42546) and [CNAME instructions](https://www.godaddy.com/en-uk/help/edit-a-cname-record-19237) explain the DNS editor. Account-level Pages domain verification, if requested by GitHub, requires its generated TXT value; no verification token has been invented.
 
 ## AI PROJECT HANDSHAKE
 
 **Protocol Version:** 1.0
 
-**Handshake:** H-0004
+**Handshake:** H-0005
 
-**Current Owner:** CODEX
+**Current Owner:** CHATGPT
 
-**State:** AUTHORIZED_FOR_LAUNCH
+**State:** BLOCKED_ON_DNS
 
 **Task ID:** RBLP-002
 
-**Last Completed Action:**  
-ChatGPT reviewed the complete V1 implementation against the project charter and approved it without revision. Jeff explicitly authorized production launch on September 11, 2026. The production-launch gate is therefore cleared.
+**Last Completed Action:**
+Codex synchronized to H-0004 and executed the authorized launch task. GitHub Pages was enabled from main at the repository root, preserving CNAME for Red-Beard.com. Deployment 34661756167 succeeded; all four pages and CSS were verified at the GitHub origin with HTTP 200 and exact source matches. Public apex DNS still points to the old YouTube forwarding service, and www has no DNS answer. GitHub's custom-domain certificate is not yet issued, so HTTPS enforcement could not be enabled. Exact GoDaddy records, manual steps, public response results, and remaining checks are recorded above. Production status is BLOCKED_ON_DNS.
 
-**Next Required Action:**  
-Codex must synchronize with the latest main branch, read H-0004 first and README.md in full, and execute the production-launch task. Verify whether GitHub Pages can be enabled/configured for this repository from the available environment. If possible, configure GitHub Pages to publish from the `main` branch repository root and preserve the existing `CNAME` for `Red-Beard.com`. Determine the exact DNS records required at the current registrar for both the apex domain and `www` if appropriate, but do not invent or assume registrar changes. If registrar access is unavailable, return the exact records and step-by-step changes Jeff must make manually. After DNS is in place or once a manual registrar step is the only blocker, verify the public domain, redirects/canonical host behavior, all four pages, CSS assets, and HTTPS. Do not add analytics, tracking, frameworks, cookie banners, or unapproved content. Record all launch actions, verification results, and any remaining manual DNS/registrar requirements in this README, increment the handshake, return Current Owner to CHATGPT, and clearly state whether production is LIVE, PARTIALLY_LIVE, or BLOCKED_ON_DNS.
+**Next Required Action:**
+ChatGPT must read H-0005 first and README.md in full, guide Jeff through the documented GoDaddy forwarding removal and DNS changes, then issue the next numbered handshake assigning CODEX to verify DNS propagation, GitHub certificate issuance, HTTPS enforcement, apex/www redirects, all four public pages, and CSS. Record LIVE only after those checks pass. Jeff's production-launch approval remains in effect; no new product approval is needed for these already authorized launch steps.
 
-**Blockers:**  
-No product or implementation blockers. GitHub Pages configuration permissions and registrar/DNS access are unconfirmed. Official logo and brand destination URLs remain non-blocking post-launch items.
+**Blockers:**
+Manual GoDaddy forwarding/DNS changes are required because registrar access was unavailable. GitHub custom-domain certificate issuance and HTTPS enforcement await correct DNS. No product, code, or GitHub configuration-permission blockers remain. Official logo and approved brand destination URLs remain non-blocking post-launch items.
 
 ## Handshake Rules
 
