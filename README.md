@@ -241,34 +241,25 @@ No approved image files were found in the workspace/repository. Text identity re
 
 **Protocol Version:** 1.0
 
-**Handshake:** H-0011
+**Handshake:** H-0012
 
-**Current Owner:** CHATGPT
+**Current Owner:** CODEX
 
-**State:** LIVE
+**State:** IN_PROGRESS
 
-**Task ID:** RBLP-003
+**Task ID:** RBLP-004
 
 **Last Completed Action:**
-Codex synchronized with H-0010, read the handshake first and README.md in full, added the four approved clickable brand destinations including Coach Jeff King, and published implementation commit 8c4826b. Added accessible underlined full-width brand links and preserved the restrained design. No infrastructure or tracking changes were made. Approved logo assets were absent, so temporary text identity remains.
-
-**Verification:**
-All four external destinations returned 200 with expected page titles; Print Ranch Manager redirects to manager.3dprintrancher.com and its approved source URL remains unchanged in the link. Static/internal link checks, responsive checks at 320/375/768/1440 pixels, and visible focus for all 14 home-page links passed. Public HTTPS pages and CSS return 200 and exactly match committed source; alternate host/scheme redirects preserve paths and TLS validates. Basic checks are not a full accessibility or external-service audit.
-
-**Branding Status:**
-Red Beard Studios LLC text identity and all four approved brand links are deployed. Approved horizontal lockup and RB monogram integration await asset import; no artwork was invented.
+Jeff supplied four approved PNG assets and explicitly authorized Codex to take ownership for a narrowly scoped logo integration. Codex read H-0011 first and the complete README. Supplied Image 3 is the horizontal lockup; Image 2 is the standalone RB monogram. Images 1 and 4 are stacked variants.
 
 **Next Required Action:**
-ChatGPT must synchronize with main, read H-0011 first and README.md in full, review the live four-brand section, and report completion to Jeff. Import Jeff's approved horizontal lockup and RB monogram into the repository/workspace, then issue the next numbered handshake assigning a narrowly scoped header/favicon/app-icon integration task using the approved palette. Do not repeat completed DNS, hosting or HTTPS work.
+Integrate the approved horizontal lockup into all site headers and the RB monogram as favicon/app icons, preserving accessible text fallback, artwork proportions/colors, the restrained approved palette, and all four brand links. Only non-destructive sizing/cropping is permitted. Verify desktop/mobile rendering, 320/375/768/1440 widths, icon loading, keyboard/focus, production HTTPS resources and preserved links. Commit/push and return ownership to CHATGPT in H-0013. Do not alter infrastructure, tracking, legal structure, or unrelated content.
 
 **Blockers:**
-None for the deployed link update or production site. Approved logo files are the only remaining non-blocking branding dependency.
+None identified. Integration must stop if asset inspection cannot confidently identify the two required variants.
 
-**Commit / Push Status:**
-Implementation 8c4826b is committed and pushed to main; this full README handoff is committed and pushed separately. The final user-facing handoff supplies its exact commit hash.
-
-**Working-tree Status:**
-Clean and synchronized with origin/main after the handoff commit and push; final Git verification is reported to Jeff.
+**Verification / Commit Status:**
+Implementation and verification pending. This ownership record is committed before implementation; production remains live with the previous branding.
 
 ## Handshake Rules
 
