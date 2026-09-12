@@ -193,13 +193,13 @@ Launch task RBLP-002 was executed on September 11, 2026 (America/Denver), follow
 | TLS | Current apex forwarding endpoint and default GitHub hostname pass certificate verification. This does not verify a GitHub certificate for the custom domain. GitHub custom-domain TLS is pending. No certificate validation was bypassed. |
 | Canonical metadata | Deployed HTML matches source, including HTTPS apex canonical URLs. Public host redirects do not yet implement the desired canonical behavior. |
 
-#### Exact manual GoDaddy changes
+#### Exact GoDaddy changes — explicitly authorized by Jeff
 
-Public registry RDAP identifies the registrar as **GoDaddy.com, LLC**. The authoritative nameservers are `ns19.domaincontrol.com` and `ns20.domaincontrol.com`. Authoritative DNS currently returns apex A records `15.197.225.128` and `3.33.251.168` with TTL 3600; there are no apex AAAA records and no `www` A, AAAA, or CNAME answers. No connected registrar tool or open registrar session was available, so the following changes remain for Jeff.
+Jeff has explicitly authorized Codex to make the following production DNS and forwarding changes in GoDaddy for `red-beard.com` if Codex can access an authenticated GoDaddy session. This authorization is limited to the changes listed here. Do not change nameservers, MX records, email-related TXT records, unrelated subdomains, billing settings, domain ownership, privacy settings, renewals, or any other registrar/account configuration.
 
-1. Sign in to GoDaddy, open **Domain Portfolio**, select **red-beard.com**, and open **DNS**.
-2. Under **Forwarding**, remove the domain forwarding to `http://www.youtube.com/@denoftools` (and any `www` forwarding if present). The current public redirect was verified; the account's exact forwarding settings were not accessible. If forwarding locks the current A records, remove forwarding first, then reopen DNS records.
-3. Replace the two old apex A values, `15.197.225.128` and `3.33.251.168`, with the four GitHub Pages A records below. Add the `www` CNAME. Ensure the final set has all four A values, no old forwarding A values, and only one CNAME for `www`.
+1. Open the DNS settings for `red-beard.com`.
+2. Remove the existing domain forwarding to `http://www.youtube.com/@denoftools` and any corresponding `www` forwarding if present.
+3. Replace the current apex A records `15.197.225.128` and `3.33.251.168` with these four GitHub Pages A records:
 
 | Type | Name / Host | Value / Points to | TTL |
 | --- | --- | --- | --- |
@@ -209,33 +209,37 @@ Public registry RDAP identifies the registrar as **GoDaddy.com, LLC**. The autho
 | A | @ | 185.199.111.153 | 1 hour |
 | CNAME | www | redbeardrex.github.io | 1 hour |
 
-4. Save the records. The CNAME target is only `redbeardrex.github.io`, with no `https://` prefix and no `/RedBeardLLC` path. Leave the existing nameservers and unrelated MX, TXT, email, and subdomain records unchanged. No apex AAAA records are required for this IPv4 configuration; do not add conflicting apex addresses or a wildcard record.
-5. Confirm the new A records and `www` CNAME have propagated. GoDaddy advises that changes commonly take effect within an hour but may take up to 48 hours globally.
-6. Open [repository Pages settings](https://github.com/RedBeardRex/RedBeardLLC/settings/pages). Keep **Deploy from a branch → main → / (root)** and custom domain **red-beard.com**. Once the DNS check succeeds and GitHub issues the certificate, enable **Enforce HTTPS**. GitHub advises HTTPS availability may take up to an hour after correct custom-domain configuration.
-7. Return the task for verification: all four pages and CSS must load over `https://red-beard.com`; HTTP must redirect to HTTPS; both `www` schemes must reach the HTTPS apex, preserving paths; certificates must validate for apex and `www`. Then record LIVE in a new handshake.
+4. Ensure there are no old forwarding A values, no conflicting `www` A/AAAA/CNAME records, and only one `www` CNAME.
+5. Leave existing nameservers `ns19.domaincontrol.com` and `ns20.domaincontrol.com` unchanged.
+6. Leave all unrelated MX, TXT, email, verification, and subdomain records unchanged.
+7. Do not add apex AAAA records or wildcard records.
+8. If GoDaddy presents any ambiguous destructive warning, requests a nameserver change, requires a purchase, changes email service, or presents a setting outside the exact scope above, stop and return control to CHATGPT/JEFF rather than proceeding.
+9. If login or MFA is required and Jeff must complete it interactively, pause only for that authentication step and continue afterward without requesting a new product authorization.
+10. After saving the DNS changes, verify authoritative DNS propagation. Once GitHub issues the custom-domain certificate, enable **Enforce HTTPS** in GitHub Pages.
+11. Verify all four pages and CSS at `https://red-beard.com`; verify HTTP redirects to HTTPS and both `www` schemes redirect to the HTTPS apex while preserving paths. Record LIVE only after those checks pass.
 
-DNS values and expected apex/`www` redirects were checked against [GitHub custom-domain documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) and [GitHub HTTPS guidance](https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https). GoDaddy's [A record instructions](https://www.godaddy.com/en-uk/help/add-or-edit-an-a-record-42546) and [CNAME instructions](https://www.godaddy.com/en-uk/help/edit-a-cname-record-19237) explain the DNS editor. Account-level Pages domain verification, if requested by GitHub, requires its generated TXT value; no verification token has been invented.
+Public registry RDAP identifies the registrar as **GoDaddy.com, LLC**. The authoritative nameservers are `ns19.domaincontrol.com` and `ns20.domaincontrol.com`. Authoritative DNS before this authorization returned apex A records `15.197.225.128` and `3.33.251.168` with TTL 3600; there were no apex AAAA records and no `www` A, AAAA, or CNAME answers.
 
 ## AI PROJECT HANDSHAKE
 
 **Protocol Version:** 1.0
 
-**Handshake:** H-0005
+**Handshake:** H-0006
 
-**Current Owner:** CHATGPT
+**Current Owner:** CODEX
 
-**State:** BLOCKED_ON_DNS
+**State:** AUTHORIZED_FOR_DNS_CHANGE
 
 **Task ID:** RBLP-002
 
 **Last Completed Action:**
-Codex synchronized to H-0004 and executed the authorized launch task. GitHub Pages was enabled from main at the repository root, preserving CNAME for Red-Beard.com. Deployment 34661756167 succeeded; all four pages and CSS were verified at the GitHub origin with HTTP 200 and exact source matches. Public apex DNS still points to the old YouTube forwarding service, and www has no DNS answer. GitHub's custom-domain certificate is not yet issued, so HTTPS enforcement could not be enabled. Exact GoDaddy records, manual steps, public response results, and remaining checks are recorded above. Production status is BLOCKED_ON_DNS.
+ChatGPT reviewed H-0005 and Jeff explicitly authorized Codex to proceed with the documented GoDaddy forwarding and DNS changes required to launch Red-Beard.com. The authorization scope is recorded above and is limited to removing the old YouTube forwarding, replacing the apex A records with GitHub Pages addresses, adding the www CNAME, preserving unrelated DNS/email/account settings, and completing GitHub HTTPS enforcement after certificate issuance.
 
 **Next Required Action:**
-ChatGPT must read H-0005 first and README.md in full, guide Jeff through the documented GoDaddy forwarding removal and DNS changes, then issue the next numbered handshake assigning CODEX to verify DNS propagation, GitHub certificate issuance, HTTPS enforcement, apex/www redirects, all four public pages, and CSS. Record LIVE only after those checks pass. Jeff's production-launch approval remains in effect; no new product approval is needed for these already authorized launch steps.
+Codex must synchronize to main, read H-0006 first and README.md in full, and proceed with the explicitly authorized GoDaddy changes if an authenticated registrar session is available. If authentication/MFA requires Jeff's interaction, pause only for that step. If no GoDaddy session or registrar-control capability is available, report that specific access blocker and do not invent changes. After DNS is saved, verify propagation, GitHub certificate issuance, HTTPS enforcement, apex/www redirects, all four public pages, and CSS. If all checks pass, update to the next handshake with Current Owner CHATGPT and State LIVE. If DNS has been changed but propagation/certificate issuance is incomplete, return PARTIALLY_LIVE or WAITING_FOR_DNS with exact verification results.
 
 **Blockers:**
-Manual GoDaddy forwarding/DNS changes are required because registrar access was unavailable. GitHub custom-domain certificate issuance and HTTPS enforcement await correct DNS. No product, code, or GitHub configuration-permission blockers remain. Official logo and approved brand destination URLs remain non-blocking post-launch items.
+Registrar authentication/access may still be required. No further product approval is required for the exact GoDaddy changes documented above. Official logo and approved brand destination URLs remain non-blocking post-launch items.
 
 ## Handshake Rules
 
