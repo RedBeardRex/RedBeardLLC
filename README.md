@@ -168,9 +168,27 @@ No install or build step is needed. From the repository root, run `python3 -m ht
 - Text contrast: all six text/background color combinations exceeded 4.5:1 (measured range 5.79:1–13.98:1).
 - `git diff --check` passed. These are basic accessibility and static-site checks, not a complete WCAG audit; screen-reader testing, browser text enlargement, and additional browser engines remain review opportunities.
 
-### Production launch status — BLOCKED_ON_DNS
+### Production launch status — PARTIALLY_LIVE
 
-Launch task RBLP-002 was executed on September 11, 2026 (America/Denver), following Jeff's approval in H-0004. GitHub deployment succeeded; the canonical public domain is still using the old forwarding service. Production is **BLOCKED_ON_DNS**, not live at the intended domain.
+The authorized H-0006 GoDaddy changes are saved. As of **2026-09-12 00:51 UTC** (September 11, America/Denver), authoritative DNS and public resolvers return GitHub Pages addresses. GitHub serves the correct site over HTTP, but its custom-domain certificate has not been issued and HTTPS enforcement remains unavailable. Production is **PARTIALLY_LIVE**; do not mark LIVE until HTTPS and all canonical redirects pass.
+
+#### H-0006 DNS changes and verification
+
+- Used the authenticated GoDaddy session for `red-beard.com`. Removed the YouTube forwarding rule after Jeff's explicit confirmation at the deletion prompt. GoDaddy now shows both domain and subdomain forwarding as **Not set up**.
+- Removing forwarding restored GoDaddy's default apex parking record and a `www` alias. Changed that apex record to `185.199.108.153`, added `185.199.109.153`, `185.199.110.153`, and `185.199.111.153`, and updated the restored `www` CNAME to `redbeardrex.github.io`. All five records use TTL 3600 (1 Hour). GoDaddy confirmed successful saves.
+- Both authoritative nameservers, `ns19.domaincontrol.com` and `ns20.domaincontrol.com`, return exactly the four GitHub apex A addresses and the `www` CNAME above. No old forwarding/parking A values remain and there are no apex AAAA records.
+- Cloudflare (`1.1.1.1`) and Google (`8.8.8.8`) DNS also return the four GitHub A values and correct `www` CNAME. Nameservers remain unchanged.
+- Reviewed all three pages of the resulting DNS table. Existing Google mail MX records, SPF/DKIM/DMARC TXT records, email CNAMEs, the `pay` subdomain, and default NS/SOA records remain present. No edits were made to those records or to any account, billing, ownership, privacy, renewal, or security settings. No wildcard records were added.
+- Re-saved the existing GitHub Pages custom domain `red-beard.com` after correcting DNS. Pages remains built from `main` at `/`; the committed `CNAME` remains `Red-Beard.com`.
+- At the GitHub IP returned by public DNS, all five HTTP paths (`/`, `/privacy.html`, `/terms.html`, `/accessibility.html`, `/css/styles.css`) return 200 and match the repository files byte for byte. HTTP `www` requests for all five paths return 301 to the matching apex HTTP path.
+- Those endpoint checks used `curl --resolve` with `185.199.108.153` because this machine's default HTTP client still connected to the cached old address `3.33.251.168` and returned 404, even after DNS queries returned the new addresses. These results establish destination readiness, not expiration of every resolver/client cache.
+- HTTPS at the GitHub destination fails hostname certificate validation for both apex and `www`. No TLS validation was bypassed. At 00:51 UTC the Pages API still reported `https_certificate: null` and `https_enforced: false`; the enforcement request returned HTTP 404, “The certificate does not exist yet.” HTTPS canonical redirects cannot be verified until issuance and enforcement succeed.
+
+Remaining work: allow DNS/client caches and GitHub certificate provisioning to finish; verify certificate coverage for apex and `www`; enable HTTPS enforcement; then verify all five paths through normal public DNS, HTTP-to-HTTPS redirects, and `www`-to-apex redirects preserving paths. No additional GoDaddy changes or product approval are currently needed.
+
+#### Earlier H-0004 launch record (historical)
+
+The following deployment actions and response results describe the initial launch attempt before the H-0006 DNS changes above.
 
 #### Completed launch actions
 
@@ -181,7 +199,7 @@ Launch task RBLP-002 was executed on September 11, 2026 (America/Denver), follow
 - Requested HTTPS enforcement. GitHub returned HTTP 404, “The certificate does not exist yet.” Its API reports `https_certificate: null` and `https_enforced: false`. Enforcement must be retried after DNS points to GitHub and the certificate is issued.
 - No registrar settings, DNS records, site content, analytics, or dependencies were changed.
 
-#### Verification results
+#### Initial verification results (before DNS changes)
 
 | Check | Result |
 | --- | --- |
@@ -224,22 +242,22 @@ Public registry RDAP identifies the registrar as **GoDaddy.com, LLC**. The autho
 
 **Protocol Version:** 1.0
 
-**Handshake:** H-0006
+**Handshake:** H-0007
 
-**Current Owner:** CODEX
+**Current Owner:** CHATGPT
 
-**State:** AUTHORIZED_FOR_DNS_CHANGE
+**State:** PARTIALLY_LIVE
 
 **Task ID:** RBLP-002
 
 **Last Completed Action:**
-ChatGPT reviewed H-0005 and Jeff explicitly authorized Codex to proceed with the documented GoDaddy forwarding and DNS changes required to launch Red-Beard.com. The authorization scope is recorded above and is limited to removing the old YouTube forwarding, replacing the apex A records with GitHub Pages addresses, adding the www CNAME, preserving unrelated DNS/email/account settings, and completing GitHub HTTPS enforcement after certificate issuance.
+Codex completed the GoDaddy changes authorized in H-0006 and confirmed by Jeff: removed the old YouTube forwarding, replaced the restored parking A record with the first GitHub address, added the remaining three GitHub A addresses, and set www CNAME to redbeardrex.github.io, all with one-hour TTLs. Both authoritative nameservers plus Cloudflare and Google DNS confirm the exact records. Unrelated records and account settings were not edited. GitHub serves all four pages and CSS with exact source matches over HTTP; www HTTP redirects preserve all tested paths. Custom-domain certificate issuance is still pending; HTTPS enforcement returned HTTP 404 because the certificate does not exist yet. Production is PARTIALLY_LIVE, with detailed verification and cache limitations recorded above.
 
 **Next Required Action:**
-Codex must synchronize to main, read H-0006 first and README.md in full, and proceed with the explicitly authorized GoDaddy changes if an authenticated registrar session is available. If authentication/MFA requires Jeff's interaction, pause only for that step. If no GoDaddy session or registrar-control capability is available, report that specific access blocker and do not invent changes. After DNS is saved, verify propagation, GitHub certificate issuance, HTTPS enforcement, apex/www redirects, all four public pages, and CSS. If all checks pass, update to the next handshake with Current Owner CHATGPT and State LIVE. If DNS has been changed but propagation/certificate issuance is incomplete, return PARTIALLY_LIVE or WAITING_FOR_DNS with exact verification results.
+ChatGPT must read H-0007 first and README.md in full, then assign CODEX the remaining verification through the next numbered handshake: check DNS/client-cache propagation and GitHub certificate issuance; enable HTTPS enforcement when available; verify valid apex/www certificates, all four public pages and CSS through normal DNS, HTTP-to-HTTPS redirects, and www-to-HTTPS-apex redirects preserving paths. Record LIVE only when all checks pass. Do not repeat the completed registrar changes. Existing launch authorization remains valid and no further product approval is needed.
 
 **Blockers:**
-Registrar authentication/access may still be required. No further product approval is required for the exact GoDaddy changes documented above. Official logo and approved brand destination URLs remain non-blocking post-launch items.
+GitHub custom-domain certificate issuance and expiry of stale client/resolver DNS caches remain pending. HTTPS is not yet validated and enforcement is not enabled. Registrar access and DNS editing are complete; there are no remaining manual GoDaddy steps identified. Official logo and approved brand destination URLs remain non-blocking post-launch items.
 
 ## Handshake Rules
 
