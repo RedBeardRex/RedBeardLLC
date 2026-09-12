@@ -177,9 +177,21 @@ No install or build step is needed. From the repository root, run `python3 -m ht
 - Text contrast: all six text/background color combinations exceeded 4.5:1 (measured range 5.79:1–13.98:1).
 - `git diff --check` passed. These are basic accessibility and static-site checks, not a complete WCAG audit; screen-reader testing, browser text enlargement, and additional browser engines remain review opportunities.
 
-### Production launch status — PARTIALLY_LIVE
+### Production launch status — LIVE
 
-The authorized H-0006 GoDaddy changes are saved. As of **2026-09-12 00:51 UTC** (September 11, America/Denver), authoritative DNS and public resolvers return GitHub Pages addresses. GitHub serves the correct site over HTTP, but its custom-domain certificate had not yet been issued and HTTPS enforcement remained unavailable. Production remains **PARTIALLY_LIVE** until Codex completes H-0008 verification and records LIVE.
+As of **2026-09-12 03:15 UTC**, production is **LIVE** at **https://red-beard.com** under the approved public identity **Red Beard Studios LLC**. HTTPS is enforced, certificates validate for apex and www, and all required pages and CSS pass through normal public DNS. The approved logo files are not present in the repository/workspace, so the corrected temporary text identity remains in use.
+
+#### H-0008 final launch and identity verification
+
+- Updated all four HTML pages: public company references, header identity and accessible labels, titles, descriptions, Open Graph metadata, legal/privacy/accessibility copy, mailing-address company names, and copyright now say Red Beard Studios LLC. Domain, email, postal address, page structure, and approved brands are preserved. Implementation commit: `e23fb2c`.
+- No logo assets were found in the workspace/repository. No logo or monogram was redrawn. Horizontal lockup and favicon/app-icon integration remain dependent on importing Jeff's approved files. The existing accessible temporary styling remains; the documented production palette is available for the eventual logo integration.
+- Public DNS returns all four GitHub A addresses and www CNAME redbeardrex.github.io. Normal HTTP clients now reach GitHub; the previously observed stale local DNS destination is no longer blocking verification. No GoDaddy settings were changed in this pass.
+- Restarted stalled certificate provisioning by removing and immediately restoring the GitHub Pages custom-domain setting, following [GitHub's documented procedure](https://docs.github.com/en/pages/getting-started-with-github-pages/securing-your-github-pages-site-with-https). GitHub automatically committed CNAME removal/restoration (`2baa443`, `d13e9aa`) and normalized its value to lowercase `red-beard.com`; the domain is unchanged. Both remote commits were fast-forwarded into the workspace before the identity commit.
+- GitHub's certificate is approved for red-beard.com and www.red-beard.com, expiring December 10, 2026. Enabled HTTPS enforcement and verified the API reports `https_enforced: true`.
+- [Deployment 34669826392](https://github.com/RedBeardRex/RedBeardLLC/actions/runs/34669826392) built commit `e23fb2c` successfully. The final Pages build status is built with no error.
+- All five HTTPS apex paths (`/`, `/privacy.html`, `/terms.html`, `/accessibility.html`, `/css/styles.css`) return HTTP 200 and match local committed files byte for byte using normal DNS, without IP overrides or bypassing certificate validation.
+- All 20 combinations of HTTP/HTTPS, apex/www, and the five paths finish at the corresponding HTTPS apex path with HTTP 200 and valid TLS. During the first check, HTTP www root used an intermediate HTTP apex redirect; the full chain still reached the HTTPS apex correctly. All paths were preserved.
+- Re-ran static validation: 37 internal links/assets/fragments, unique IDs, landmarks, language, viewport and canonical metadata passed. All four pages were checked at 320, 375, 768 and 1440 pixels without horizontal overflow. Keyboard skip link retained visible focus and moved focus to main. Existing text contrast remains 5.79:1–13.98:1; no scripts, trackers or dependencies were added. These are basic accessibility checks, not a full WCAG or assistive-technology audit.
 
 #### H-0006 DNS changes and verification
 
@@ -193,7 +205,7 @@ The authorized H-0006 GoDaddy changes are saved. As of **2026-09-12 00:51 UTC** 
 - Those endpoint checks used `curl --resolve` with `185.199.108.153` because this machine's default HTTP client still connected to the cached old address `3.33.251.168` and returned 404, even after DNS queries returned the new addresses. These results establish destination readiness, not expiration of every resolver/client cache.
 - HTTPS at the GitHub destination failed hostname certificate validation for both apex and `www` at H-0007. No TLS validation was bypassed. At that time the Pages API reported `https_certificate: null` and `https_enforced: false`.
 
-Remaining launch work: verify DNS/client-cache propagation and GitHub certificate provisioning; enable HTTPS enforcement when available; then verify all five paths through normal public DNS, HTTP-to-HTTPS redirects, and `www`-to-apex redirects preserving paths. No additional GoDaddy changes or product approval are required.
+The launch work pending at H-0007 was completed during H-0008 as recorded above. This subsection is historical.
 
 #### Earlier H-0004 launch record (historical)
 
@@ -238,22 +250,28 @@ Existing nameservers, MX, TXT, email, verification, unrelated subdomain, billing
 
 **Protocol Version:** 1.0
 
-**Handshake:** H-0008
+**Handshake:** H-0009
 
-**Current Owner:** CODEX
+**Current Owner:** CHATGPT
 
-**State:** READY_FOR_FINAL_LAUNCH_VERIFICATION
+**State:** LIVE
 
 **Task ID:** RBLP-002
 
 **Last Completed Action:**
-ChatGPT reviewed H-0007 and accepted Codex's completed GoDaddy changes. No further registrar changes are currently required. Jeff also confirmed the official public identity is **Red Beard Studios LLC**, superseding the earlier working name **Red Beard LLC**, and supplied approved logo assets outside the repository. ChatGPT updated the authoritative charter and brand direction accordingly.
+Codex synchronized with H-0008, read the handshake first and README.md in full, updated every public company-name reference and metadata field to Red Beard Studios LLC, and published implementation commit e23fb2c. Restarted stalled GitHub certificate provisioning, enabled HTTPS enforcement after issuance, and verified the successful deployment. All five HTTPS apex resources match the committed source; all 20 host/scheme/path combinations reach the correct HTTPS apex URL with valid TLS. Static/link, responsive and keyboard accessibility checks passed. No GoDaddy changes were repeated. Logo assets were absent, so the corrected temporary text identity remains. Full handoff requirements were added to the protocol at Jeff's request.
+
+**Verification:**
+Production is LIVE as of 2026-09-12 03:15 UTC. Pages builds from main at /, certificate covers apex and www, and HTTPS enforcement is enabled. HTTP 200, source equality, normal DNS, valid TLS, complete redirect chains, path preservation, 37 local links and four responsive widths passed. See the H-0008 verification record above for exact scope and limitations.
+
+**Branding Status:**
+Text and metadata identity correction is complete and deployed. Approved horizontal lockup and RB monogram integration are pending asset import; no replacement artwork was invented.
 
 **Next Required Action:**
-Codex must synchronize to main, read H-0008 first and README.md in full, and continue without repeating any GoDaddy changes. First, check current public DNS/client-cache behavior and GitHub Pages custom-domain certificate status. When the certificate exists, enable Enforce HTTPS. Verify valid TLS for both `red-beard.com` and `www.red-beard.com`; verify `/`, `/privacy.html`, `/terms.html`, `/accessibility.html`, and `/css/styles.css` through normal public DNS; verify HTTP redirects to HTTPS and both www schemes redirect to the HTTPS apex while preserving paths. If all launch checks pass, update production status to LIVE. As part of the same implementation pass, update all public-facing site text, page titles, descriptions, Open Graph metadata, legal-page references, footer/copyright text, and accessibility/privacy references from **Red Beard LLC** to **Red Beard Studios LLC**. Preserve domain, email, address, scope, and legal/trust structure. If the approved logo files are present in the workspace or repository, integrate the horizontal lockup into the header and the RB monogram as favicon/app-icon assets using the documented brand palette; if the files are not available to Codex, do not redraw them—complete the text/metadata identity update, record the missing asset-import dependency, and leave the temporary text identity in place. Re-run static/link/accessibility checks after any content/branding changes. Commit and push all work, then advance to the next handshake with Current Owner CHATGPT and an exact launch/branding status.
+ChatGPT must synchronize with main, read H-0009 first and README.md in full, review the live Red Beard Studios LLC site, and report launch completion to Jeff. Obtain/import the approved horizontal lockup and RB monogram files into the repository/workspace, then issue a separately scoped branding task through the next numbered handshake for header and favicon/app-icon integration using the approved palette. Approved brand destination URLs can be handled in a later scoped task. Do not repeat completed GoDaddy or HTTPS configuration.
 
 **Blockers:**
-Potential remaining launch blocker: GitHub certificate issuance / stale client cache. Logo files may not yet be present in the repository or Codex workspace; this is non-blocking for HTTPS launch and text/metadata identity correction. No further GoDaddy work is authorized or required at this time.
+No launch blockers remain. Approved logo files are not available in the repository/workspace; this blocks only logo/favicon integration. Approved brand destination URLs remain a non-blocking future input.
 
 ## Handshake Rules
 
@@ -268,5 +286,7 @@ Whenever ChatGPT or Codex begins or resumes work:
 5. Discard stale remembered state whenever the repository is newer.
 6. Do not perform implementation work unless the handshake assigns ownership appropriately.
 7. The party completing its assigned task must update the handshake before handing ownership to the next party.
+
+Every handoff must be complete in both README.md and the final user-facing response. Include Protocol Version, Handshake number, Current Owner, State, Task ID, Last Completed Action, verification results and limitations, exact next required action, blockers (including non-blocking dependencies), commit/push status, and working-tree status. Do not substitute a short status summary for the full handoff. This is Jeff's persistent handoff preference.
 
 Conversation history and memory are subordinate to the current committed README.md.
